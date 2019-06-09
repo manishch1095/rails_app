@@ -18,8 +18,10 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
           <% if user_signed_in?  %>
-              <li>Logged in as <strong><%= current_user.email %></strong></li>
-              <li><%= link_to "Secret Codes", secret_codes_path%></li>
+              <li style="padding-top: 15px;color: #9d9d9d">Logged in as <strong><%= current_user.email %></strong></li>
+              <% if can? :create, SecretCode %>
+                <li><%= link_to "Secret Codes", secret_codes_path%></li>
+              <% end%>
               <li><%= link_to "Profile", users_show_path %></li>
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
           <% else %>

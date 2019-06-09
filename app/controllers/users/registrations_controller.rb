@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if sign_up_params[:secret_code].blank?
       flash[:notice] = "Please enter a valid secret code"
       redirect_to new_user_registration_path
-    elsif SecretCode.where.not(user_id: nil).pluck(:code).includes? sign_up_params[:secret_code]
+    elsif SecretCode.where.not(user_id: nil).pluck(:code).include? sign_up_params[:secret_code]
       flash[:notice] = "Please enter a valid secret code"
       redirect_to new_user_registration_path
     else
@@ -93,7 +93,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :secret_code, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first, :last, :secret_code, :email, :password, :password_confirmation)
   end
 
 end
