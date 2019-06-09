@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, path_names: {
-      sign_in: 'login', sign_out: 'logout',
-      password: 'secret', confirmation: 'verification',
-      registration: 'register', edit: 'edit/profile'
-  }
+  devise_for :users
+
+  root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

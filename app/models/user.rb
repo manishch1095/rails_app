@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable
 
   validates :email, presence: true
+
+  has_one :secret_code, inverse_of: :user
 end
