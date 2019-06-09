@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable
 
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
 
   has_one :secret_code, inverse_of: :user
 end
