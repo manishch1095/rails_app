@@ -1,18 +1,19 @@
 class SecretCodeController < ApplicationController
-  load_and_authorize_resource
 
   def index
+    authorize! :read, SecretCode
     @secret_codes = SecretCode.all.page(versions_params[:page]).per(50)
     render :index
   end
 
   def create
+    authorize! :create, SecretCode
     if permit_code_count_param[:code_count]
       (1..permit_code_count_param[:code_count].to_i).each do |x|
         SecretCode.create
       end
     end
-    render :index
+    redirect_to action: :index
   end
 
   private
